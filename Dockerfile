@@ -1,20 +1,24 @@
-FROM node:20-alpine AS builder
-
-WORKDIR /app
-
-COPY package*.json ./
-RUN npm install
-
-COPY . .
-
-RUN npm run build
-
 FROM node:20-alpine
 
 WORKDIR /app
 
-COPY --from=builder /app ./
+# copy package.json
+COPY package*.json ./
 
+# install dependencies
+RUN npm install
+
+# copy source code
+COPY . .
+
+# build vite app
+RUN npm run build
+
+# install static server
+RUN npm install -g serve
+
+# expose port
 EXPOSE 3000
 
-CMD ["npm","start"]
+# serve built files
+CMD ["serve","-s","dist","-l","3000"]
