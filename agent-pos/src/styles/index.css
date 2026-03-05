@@ -1,1 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900&display=swap');
 
+:root {
+  --green:  #16a34a;
+  --blue:   #1d4ed8;
+  --amber:  #d97706;
+  --dark:   #1e293b;
+  --gray:   #6b7280;
+  --border: #e5e7eb;
+  --bg:     #f3f4f6;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: #111827;
+  -webkit-font-smoothing: antialiased;
+}
+
+@keyframes spin    { to { transform: rotate(360deg); } }
+@keyframes slideIn { from { transform: translateX(60px); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes fadeUp  { from { transform: translateY(14px); opacity: 0; } to { transform: none; opacity: 1; } }
+
+button:active { transform: scale(0.97); }
+button { font-family: 'DM Sans', sans-serif; }
+input, select { font-family: 'DM Sans', sans-serif; }
