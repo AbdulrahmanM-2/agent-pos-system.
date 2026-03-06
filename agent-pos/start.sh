@@ -1,2 +1,2 @@
 #!/bin/sh
-npx serve dist --listen ${PORT:-3000}
+node server/index.js
