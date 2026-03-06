@@ -186,4 +186,4 @@ Then go straight to login — no `/api/setup` needed:
 ```
 https://agent-pos-system-production.up.railway.app
 Username: admin
-Password: Admin@1234
+Password: Admin@1235
