@@ -35,7 +35,14 @@ function admin(req, res, next) {
 }
 
 app.get('/api/health', (req, res) => res.json({ status: 'ok', time: new Date() }))
-
+app.get('/api/reset-admin', async (req, res) => {
+  try {
+    const bcrypt = require('bcryptjs')
+    const hash = await bcrypt.hash('Admin@1234', 10)
+    await pool.query('UPDATE users SET password=$1 WHERE username=$2', [hash, 'admin'])
+    res.send('<html><body style="padding:40px;font-family:sans-serif"><h2 style="color:green">✅ Admin password reset!</h2><p>Username: <b>admin</b><br>Password: <b>Admin@1234</b></p><a href="/">Go to Login</a></body></html>')
+  } catch(e) { res.status(500).send('Error: ' + e.message) }
+})
 app.get('/api/setup', async (req, res) => {
   try {
     await pool.query(`CREATE TABLE IF NOT EXISTS users (id SERIAL PRIMARY KEY, username VARCHAR(50) UNIQUE NOT NULL, password VARCHAR(255) NOT NULL, full_name VARCHAR(100) NOT NULL, role VARCHAR(20) NOT NULL, phone VARCHAR(20), email VARCHAR(100), is_active BOOLEAN DEFAULT TRUE, created_at TIMESTAMPTZ DEFAULT NOW(), updated_at TIMESTAMPTZ DEFAULT NOW())`)
